@@ -71,15 +71,22 @@ class _ReceiptSectionState extends State<ReceiptSection> {
               ),
             ),
             Padding(
-              padding: const EdgeInsets.all(16.0),
+              padding: const EdgeInsets.all(0),
               child: TextField(
                 controller: _textController,
                 focusNode: _focusNode,
                 autofocus: true,
-                decoration: InputDecoration(
-                  labelText: AppLocalizations.of(context)!.scanBarcode,
-                  border: OutlineInputBorder(),
+                decoration: const InputDecoration(
+                  border: InputBorder.none,
+                  enabledBorder: InputBorder.none,
+                  focusedBorder: InputBorder.none,
                 ),
+                style: const TextStyle(
+                  color: Colors.transparent,
+                  height: 0,
+                ),
+                cursorColor: Colors.transparent,
+                cursorWidth: 0,
               ),
             ),
             Expanded(
