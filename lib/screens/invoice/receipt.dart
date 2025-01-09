@@ -13,11 +13,15 @@ class ReceiptSection extends StatefulWidget {
 class _ReceiptSectionState extends State<ReceiptSection> {
   final List<String> _scannedCodes = [];
   final TextEditingController _textController = TextEditingController();
+  final FocusNode _focusNode = FocusNode();
 
   @override
   void initState() {
     super.initState();
     RawKeyboard.instance.addListener(_handleKeyEvent);
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      _focusNode.requestFocus();
+    });
   }
 
   @override 
@@ -36,6 +40,9 @@ class _ReceiptSectionState extends State<ReceiptSection> {
             _scannedCodes.add(scannedBarcode);
           });
           _textController.clear();
+          Future.delayed(const Duration(milliseconds: 100), () {
+            _focusNode.requestFocus();
+          });
         }
       }
     }
@@ -67,6 +74,7 @@ class _ReceiptSectionState extends State<ReceiptSection> {
               padding: const EdgeInsets.all(16.0),
               child: TextField(
                 controller: _textController,
+                focusNode: _focusNode,
                 autofocus: true,
                 decoration: InputDecoration(
                   labelText: AppLocalizations.of(context)!.scanBarcode,
