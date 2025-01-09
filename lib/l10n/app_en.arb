@@ -9,5 +9,6 @@
     "cash": "Cash",
     "card": "Card",
     "qrCode": "QR Code",
-    "receipt": "Receipt"
+    "receipt": "Receipt",
+    "scanBarcode": "Scan"
 } 

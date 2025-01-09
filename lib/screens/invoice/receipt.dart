@@ -1,9 +1,45 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:flutter/services.dart';
 
-class ReceiptSection extends StatelessWidget {
+class ReceiptSection extends StatefulWidget {
   const ReceiptSection({super.key});
+
+  @override
+  State<ReceiptSection> createState() => _ReceiptSectionState();
+}
+
+class _ReceiptSectionState extends State<ReceiptSection> {
+  final List<String> _scannedCodes = [];
+  final TextEditingController _textController = TextEditingController();
+
+  @override
+  void initState() {
+    super.initState();
+    RawKeyboard.instance.addListener(_handleKeyEvent);
+  }
+
+  @override 
+  void dispose() {
+    RawKeyboard.instance.removeListener(_handleKeyEvent);
+    _textController.dispose();
+    super.dispose();
+  }
+
+  void _handleKeyEvent(RawKeyEvent event) {
+    if (event is RawKeyDownEvent) {
+      if (event.logicalKey == LogicalKeyboardKey.enter) {
+        final scannedBarcode = _textController.text.trim();
+        if (scannedBarcode.isNotEmpty) {
+          setState(() {
+            _scannedCodes.add(scannedBarcode);
+          });
+          _textController.clear();
+        }
+      }
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -27,11 +63,27 @@ class ReceiptSection extends StatelessWidget {
                 style: Theme.of(context).textTheme.headlineSmall,
               ),
             ),
+            Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: TextField(
+                controller: _textController,
+                autofocus: true,
+                decoration: InputDecoration(
+                  labelText: AppLocalizations.of(context)!.scanBarcode,
+                  border: OutlineInputBorder(),
+                ),
+              ),
+            ),
             Expanded(
               child: ListView.builder(
-                itemCount: 0,
+                itemCount: _scannedCodes.length,
                 itemBuilder: (context, index) {
-                  return const ListTile();
+                  return ListTile(
+                    leading: const Icon(Icons.qr_code),
+                    title: Text('Item ${index + 1}'),
+                    subtitle: Text('Barcode: ${_scannedCodes[index]}'),
+                    trailing: Text('\$${(index + 1) * 10}.00'),
+                  );
                 },
               ),
             ),

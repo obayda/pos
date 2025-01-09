@@ -9,5 +9,6 @@
     "cash": "نقداً",
     "card": "بطاقة",
     "qrCode": "رمز QR",
-    "receipt": "إيصال"
+    "receipt": "إيصال",
+    "scanBarcode": "scanBarcode"
 } 

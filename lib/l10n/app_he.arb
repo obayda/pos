@@ -9,5 +9,6 @@
     "cash": "מזומן",
     "card": "כרטיס",
     "qrCode": "קוד QR",
-    "receipt": "קבלה"
+    "receipt": "קבלה",
+    "scanBarcode": "scanBarcode"
 } 
