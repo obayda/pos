@@ -1,0 +1,13 @@
+{
+    "appTitle": "نقطة البيع",
+    "homeTitle": "الرئيسية",
+    "invoice": "فاتورة",
+    "back": "رجوع",
+    "quickActions": "إجراءات سريعة",
+    "item": "عنصر",
+    "payment": "الدفع",
+    "cash": "نقداً",
+    "card": "بطاقة",
+    "qrCode": "رمز QR",
+    "receipt": "إيصال"
+} 

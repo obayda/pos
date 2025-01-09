@@ -1,0 +1,13 @@
+{
+    "appTitle": "קופה רושמת",
+    "homeTitle": "בית",
+    "invoice": "חשבונית",
+    "back": "חזור",
+    "quickActions": "פעולות מהירות",
+    "item": "פריט",
+    "payment": "תשלום",
+    "cash": "מזומן",
+    "card": "כרטיס",
+    "qrCode": "קוד QR",
+    "receipt": "קבלה"
+} 

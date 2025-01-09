@@ -1,0 +1,13 @@
+{
+    "appTitle": "POS App",
+    "homeTitle": "Home",
+    "invoice": "Invoice",
+    "back": "Back",
+    "quickActions": "Quick Actions",
+    "item": "Item",
+    "payment": "Payment",
+    "cash": "Cash",
+    "card": "Card",
+    "qrCode": "QR Code",
+    "receipt": "Receipt"
+} 
