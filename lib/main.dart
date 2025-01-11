@@ -4,6 +4,8 @@ import 'screens/invoice_screen.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:drift/drift.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -64,6 +66,42 @@ class HomeScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text(AppLocalizations.of(context)!.homeTitle),
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.sync),
+            onPressed: () async {
+              final firestore = FirebaseFirestore.instance;
+              final itemsRef = firestore.collection('items');
+              
+              // Get last sync timestamp from drift DB
+              final lastSync = await database.getLastSync();
+              
+              // Query items updated since last sync
+              final snapshot = await itemsRef
+                .where('updatedAt', isGreaterThan: lastSync)
+                .get();
+
+              // Insert new/updated items into drift DB
+              final batch = database.batch();
+              for (var doc in snapshot.docs) {
+                batch.insert(
+                  database.items,
+                  ItemsCompanion.insert(
+                    id: doc.id,
+                    name: doc.data()['name'],
+                    price: doc.data()['price'],
+                    updatedAt: doc.data()['updatedAt'],
+                  ),
+                  mode: InsertMode.insertOrReplace,
+                );
+              }
+              await batch.commit();
+              
+              // Update last sync timestamp
+              await database.updateLastSync(DateTime.now());
+            },
+          ),
+        ],
       ),
       body: ListView(
         children: [
