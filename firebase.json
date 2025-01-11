@@ -1,0 +1,24 @@
+{
+  "flutter": {
+    "platforms": {
+      "macos": {
+        "default": {
+          "projectId": "supermarket-83594",
+          "appId": "1:262434042868:ios:999439aff0b056ac7d7fa1",
+          "uploadDebugSymbols": false,
+          "fileOutput": "macos/Runner/GoogleService-Info.plist"
+        }
+      },
+      "dart": {
+        "lib/firebase_options.dart": {
+          "projectId": "supermarket-83594",
+          "configurations": {
+            "macos": "1:262434042868:ios:999439aff0b056ac7d7fa1",
+            "web": "1:262434042868:web:43656a545c369ac07d7fa1",
+            "windows": "1:262434042868:web:d203e22cee0ba8dc7d7fa1"
+          }
+        }
+      }
+    }
+  }
+}
