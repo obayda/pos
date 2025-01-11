@@ -1,5 +1,5 @@
 # Project-level configuration.
-cmake_minimum_required(VERSION 3.14)
+cmake_minimum_required(VERSION 3.5)
 project(pos LANGUAGES CXX)
 
 # The name of the executable created for the application. Change this to change
@@ -47,6 +47,7 @@ endfunction()
 
 # Flutter library and tool build rules.
 set(FLUTTER_MANAGED_DIR "${CMAKE_CURRENT_SOURCE_DIR}/flutter")
+set_property(GLOBAL PROPERTY MSVC_DEBUG_INFORMATION_FORMAT "/Zi")
 add_subdirectory(${FLUTTER_MANAGED_DIR})
 
 # Application build; see runner/CMakeLists.txt.
